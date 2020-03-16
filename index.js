@@ -2,8 +2,19 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
+import { AppRegistry } from 'react-native';
 import App from './src/screens/App';
-import {name as appName} from './app.json';
+import { name as appName } from './app.json';
+import { Provider } from 'react-redux';
+import configureStore from './src/redux/store';
+import React from 'react';
 
-AppRegistry.registerComponent(appName, () => App);
+const store = configureStore();
+
+const WeatherApp = () => (
+    <Provider store={store}>
+        <App />
+    </Provider>
+);
+
+AppRegistry.registerComponent(appName, () => WeatherApp);
