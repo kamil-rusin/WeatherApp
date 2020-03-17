@@ -3,14 +3,16 @@ import { View, StyleSheet, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const WeatherComponent = (props) => {
+    const { weather, fetchingError, pending, temperature } = props;
+
     return (
         <View style={styles.weatherContainer}>
             <View style={styles.headerContainer}>
                 <MaterialCommunityIcons size={48} name='weather-sunny' color={'#fff'} />
-                <Text style={styles.tempText}>Temperature˚</Text>
+                <Text style={styles.tempText}>{temperature}˚</Text>
             </View>
             <View style={styles.bodyContainer}>
-                <Text style={styles.title}>So Sunny</Text>
+                <Text style={styles.title}>{weather}</Text>
                 <Text style={styles.subtitle}>It hurts my eyes!</Text>
             </View>
         </View>
