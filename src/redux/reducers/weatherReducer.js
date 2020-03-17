@@ -7,10 +7,9 @@ import {
 
 const initialState = {
     pending: false,
-    data: [],
+    weather: [],
     error: null,
-    filteredData: [],
-    searchKey: '',
+    city: null,
 };
 
 const weatherReducer = (state = initialState, action) => {
@@ -25,7 +24,7 @@ const weatherReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pending: false,
-                data: action.data,
+                weather: action.weather,
             };
         case FETCH_DATA_ERROR:
             return {

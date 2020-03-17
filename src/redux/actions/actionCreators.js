@@ -14,7 +14,7 @@ export const fetchDataPending = () => {
 export const fetchDataSuccess = (data) => {
     return {
         type: FETCH_DATA_SUCCESS,
-        data: data,
+        weather: data.weather,
     };
 };
 

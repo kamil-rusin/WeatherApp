@@ -4,12 +4,12 @@
  */
 
 import React from 'react';
-import { Text } from 'react-native';
+import WeatherContainer from './WeatherContainer';
 
 const App: () => React$Node = () => {
     return (
         <>
-            <Text>Dziala</Text>
+            <WeatherContainer />
         </>
     );
 };
