@@ -19,7 +19,7 @@ const WeatherContainer = (props) => {
     const dispatch = useDispatch();
 
     const fetchData = useCallback(() => {
-        dispatch(fetchDataAction('Gliwice'));
+        dispatch(fetchDataAction('Berlin'));
     }, [dispatch]);
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const WeatherContainer = (props) => {
         <>
             <WeatherComponent
                 weather={weatherData}
-                temperature={temperature}
+                temperature={Number(temperature)}
                 fetchingError={fetchingError}
                 pending={pending}
             />
