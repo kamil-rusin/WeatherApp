@@ -1,31 +1,34 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import PropTypes from 'prop-types';
 import { weatherConditions } from '../constants/weatherConditions';
 
 const WeatherComponent = (props) => {
-    const { weather, fetchingError, pending, temperature } = props;
+    const { weather, fetchingError, pending, temperature, pressure, sunSystem } = props;
 
     if (weather != null) {
         return (
             <View
                 style={[
                     styles.weatherContainer,
-                    { backgroundColor: weatherConditions[weather].color },
+                    { backgroundColor: weatherConditions[weather.main].color },
                 ]}
             >
                 <View style={styles.headerContainer}>
                     <MaterialCommunityIcons
                         size={72}
-                        name={weatherConditions[weather].icon}
+                        name={weatherConditions[weather.main].icon}
                         color={'#fff'}
                     />
-                    <Text style={styles.tempText}>{temperature}˚</Text>
+                    <Text style={styles.tempText}>{Math.round(temperature)}˚C</Text>
                 </View>
                 <View style={styles.bodyContainer}>
-                    <Text style={styles.title}>{weatherConditions[weather].title}</Text>
-                    <Text style={styles.subtitle}>It hurts my eyes!</Text>
+                    <Text style={styles.title}>Berlin</Text>
+                    <Text style={styles.subtitle}>{pressure} hPa</Text>
+                    <Text style={styles.title}>{weather.main}</Text>
+                    <Text style={styles.subtitle}>{weather.description}</Text>
+                    <Text style={styles.subtitle}>Sunrise: {sunSystem.sunrise}</Text>
+                    <Text style={styles.subtitle}>Sunset: {sunSystem.sunset}</Text>
                 </View>
             </View>
         );
@@ -36,11 +39,6 @@ const WeatherComponent = (props) => {
             </View>
         );
     }
-};
-
-WeatherComponent.propTypes = {
-    temperature: PropTypes.number.isRequired,
-    weather: PropTypes.string,
 };
 
 const styles = StyleSheet.create({

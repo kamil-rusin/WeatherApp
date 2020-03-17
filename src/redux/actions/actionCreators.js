@@ -14,8 +14,10 @@ export const fetchDataPending = () => {
 export const fetchDataSuccess = (data) => {
     return {
         type: FETCH_DATA_SUCCESS,
-        weather: data.weather[0].main,
+        weather: data.weather[0],
         temperature: data.main.temp,
+        pressure: data.main.pressure,
+        sunSystem: data.sys,
     };
 };
 
@@ -29,6 +31,6 @@ export const fetchDataError = (error) => {
 export const updateCity = (key) => {
     return {
         type: UPDATE_CITY,
-        searchKey: key,
+        city: key,
     };
 };
