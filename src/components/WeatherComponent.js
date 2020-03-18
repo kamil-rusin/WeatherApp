@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { TextInput } from 'react-native-paper';
 import { weatherConditions } from '../constants/weatherConditions';
 import { dateConverter, timeConverter } from '../utils/timeConverter';
 import { capitalizeFirstLetter } from '../utils/stringConverter';
@@ -16,6 +17,18 @@ const WeatherComponent = (props) => {
                     { backgroundColor: weatherConditions[weather.main].color },
                 ]}
             >
+                <TextInput
+                    style={{
+                        backgroundColor: weatherConditions[weather.main].color,
+                        fontColor: '#fff',
+                        margin: 10,
+                    }}
+                    mode='outlined'
+                    label='Choose city'
+                    value={'Gliwice'}
+                    underlineColor='black'
+                    selectionColor='black'
+                />
                 <View style={styles.headerContainer}>
                     <MaterialCommunityIcons
                         size={72}
