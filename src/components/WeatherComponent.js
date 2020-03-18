@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { weatherConditions } from '../constants/weatherConditions';
+import { timeConverter } from '../utils/timeConverter';
 
 const WeatherComponent = (props) => {
     const { weather, fetchingError, pending, temperature, pressure, sunSystem } = props;
@@ -27,8 +28,8 @@ const WeatherComponent = (props) => {
                     <Text style={styles.subtitle}>{pressure} hPa</Text>
                     <Text style={styles.title}>{weather.main}</Text>
                     <Text style={styles.subtitle}>{weather.description}</Text>
-                    <Text style={styles.subtitle}>Sunrise: {sunSystem.sunrise}</Text>
-                    <Text style={styles.subtitle}>Sunset: {sunSystem.sunset}</Text>
+                    <Text style={styles.subtitle}>Sunrise: {timeConverter(sunSystem.sunrise)}</Text>
+                    <Text style={styles.subtitle}>Sunset: {timeConverter(sunSystem.sunset)}</Text>
                 </View>
             </View>
         );
