@@ -2,10 +2,11 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { weatherConditions } from '../constants/weatherConditions';
-import { timeConverter } from '../utils/timeConverter';
+import { dateConverter, timeConverter } from '../utils/timeConverter';
+import { capitalizeFirstLetter } from '../utils/stringConverter';
 
 const WeatherComponent = (props) => {
-    const { weather, fetchingError, pending, temperature, pressure, sunSystem } = props;
+    const { weather, fetchingError, pending, temperature, pressure, sunSystem, dateTime } = props;
 
     if (weather != null) {
         return (
@@ -23,13 +24,32 @@ const WeatherComponent = (props) => {
                     />
                     <Text style={styles.tempText}>{Math.round(temperature)}˚C</Text>
                 </View>
+                <View style={styles.dateTimeContainer}>
+                    <Text style={styles.title}>{timeConverter(dateTime)}</Text>
+                    <Text style={styles.title}>{dateConverter(dateTime)}</Text>
+                </View>
                 <View style={styles.bodyContainer}>
-                    <Text style={styles.title}>Berlin</Text>
+                    <Text style={styles.title}>Gliwice</Text>
                     <Text style={styles.subtitle}>{pressure} hPa</Text>
-                    <Text style={styles.title}>{weather.main}</Text>
-                    <Text style={styles.subtitle}>{weather.description}</Text>
-                    <Text style={styles.subtitle}>Sunrise: {timeConverter(sunSystem.sunrise)}</Text>
-                    <Text style={styles.subtitle}>Sunset: {timeConverter(sunSystem.sunset)}</Text>
+                    <Text style={styles.description}>
+                        {capitalizeFirstLetter(weather.description)}
+                    </Text>
+                    <View style={styles.row}>
+                        <MaterialCommunityIcons
+                            style={styles.sunIcon}
+                            size={32}
+                            name={'weather-sunset-up'}
+                            color={'#fff'}
+                        />
+                        <Text style={styles.subtitle}>{timeConverter(sunSystem.sunrise)}</Text>
+                        <MaterialCommunityIcons
+                            style={styles.sunIcon}
+                            size={32}
+                            name={'weather-sunset-down'}
+                            color={'#fff'}
+                        />
+                        <Text style={styles.subtitle}>{timeConverter(sunSystem.sunset)}</Text>
+                    </View>
                 </View>
             </View>
         );
@@ -63,12 +83,30 @@ const styles = StyleSheet.create({
         paddingLeft: 25,
         marginBottom: 40,
     },
+    dateTimeContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     title: {
-        fontSize: 60,
+        fontSize: 48,
         color: '#fff',
     },
     subtitle: {
-        fontSize: 24,
+        fontSize: 18,
+        color: '#fff',
+    },
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignContent: 'space-between',
+        justifyContent: 'space-evenly',
+    },
+    sunIcon: {
+        marginRight: 5,
+    },
+    description: {
+        fontSize: 36,
         color: '#fff',
     },
 });

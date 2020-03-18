@@ -11,6 +11,7 @@ const getWeather = (state) => state.weatherReducer.weather;
 const getTemperature = (state) => state.weatherReducer.temperature;
 const getPressure = (state) => state.weatherReducer.pressure;
 const getSunSystem = (state) => state.weatherReducer.sunSystem;
+const getDateTime = (state) => state.weatherReducer.dateTime;
 
 const WeatherContainer = (props) => {
     const weatherData = useSelector(getWeather);
@@ -20,10 +21,11 @@ const WeatherContainer = (props) => {
     const temperature = useSelector(getTemperature);
     const pressure = useSelector(getPressure);
     const sunSystem = useSelector(getSunSystem);
+    const dateTime = useSelector(getDateTime);
     const dispatch = useDispatch();
 
     const fetchData = useCallback(() => {
-        dispatch(fetchDataAction('Berlin'));
+        dispatch(fetchDataAction('Gliwice'));
     }, [dispatch]);
 
     useEffect(() => {
@@ -37,6 +39,7 @@ const WeatherContainer = (props) => {
                 temperature={Number(temperature)}
                 pressure={pressure}
                 sunSystem={sunSystem}
+                dateTime={dateTime}
                 city={chosenCity}
                 fetchingError={fetchingError}
                 pending={pending}

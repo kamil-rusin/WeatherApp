@@ -18,6 +18,7 @@ export const fetchDataSuccess = (data) => {
         temperature: data.main.temp,
         pressure: data.main.pressure,
         sunSystem: data.sys,
+        dateTime: data.dt,
     };
 };
 
