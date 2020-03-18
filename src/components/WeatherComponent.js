@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TextInput } from 'react-native-paper';
+import { TextInput, Button } from 'react-native-paper';
 import { weatherConditions } from '../constants/weatherConditions';
 import { dateConverter, timeConverter } from '../utils/timeConverter';
 import { capitalizeFirstLetter } from '../utils/stringConverter';
@@ -17,18 +17,34 @@ const WeatherComponent = (props) => {
                     { backgroundColor: weatherConditions[weather.main].color },
                 ]}
             >
-                <TextInput
-                    style={{
-                        backgroundColor: weatherConditions[weather.main].color,
-                        fontColor: '#fff',
-                        margin: 10,
-                    }}
-                    mode='outlined'
-                    label='Choose city'
-                    value={'Gliwice'}
-                    underlineColor='black'
-                    selectionColor='black'
-                />
+                <View style={styles.row}>
+                    <TextInput
+                        style={[
+                            styles.input,
+                            {
+                                backgroundColor: weatherConditions[weather.main].color,
+                            },
+                        ]}
+                        mode='outlined'
+                        label='Choose city'
+                        value={'Gliwice'}
+                    />
+                    <Button
+                        style={styles.button}
+                        contentStyle={[
+                            styles.buttonContent,
+                            {
+                                backgroundColor: weatherConditions[weather.main].color,
+                            },
+                        ]}
+                        mode='outlined'
+                        compact={true}
+                        onPress={() => console.log('Pressed')}
+                    >
+                        CHECK
+                    </Button>
+                </View>
+
                 <View style={styles.headerContainer}>
                     <MaterialCommunityIcons
                         size={72}
@@ -112,8 +128,8 @@ const styles = StyleSheet.create({
     row: {
         display: 'flex',
         flexDirection: 'row',
-        alignContent: 'space-between',
-        justifyContent: 'space-evenly',
+        alignContent: 'center',
+        justifyContent: 'center',
     },
     sunIcon: {
         marginRight: 5,
@@ -121,6 +137,20 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 36,
         color: '#fff',
+    },
+    input: {
+        margin: 10,
+        marginRight: 0,
+        width: '70%',
+    },
+    button: {
+        margin: 10,
+        marginLeft: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonContent: {
+        margin: 10,
     },
 });
 
