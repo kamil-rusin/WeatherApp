@@ -1,13 +1,22 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Button, ActivityIndicator } from 'react-native-paper';
 import { weatherConditions } from '../constants/weatherConditions';
 import { dateConverter, timeConverter } from '../utils/timeConverter';
 import { capitalizeFirstLetter } from '../utils/stringConverter';
 
 const WeatherComponent = (props) => {
-    const { weather, fetchingError, pending, temperature, pressure, sunSystem, dateTime } = props;
+    const {
+        weather,
+        fetchingError,
+        pending,
+        temperature,
+        pressure,
+        sunSystem,
+        dateTime,
+        city,
+    } = props;
 
     if (weather != null) {
         return (
@@ -27,7 +36,7 @@ const WeatherComponent = (props) => {
                         ]}
                         mode='outlined'
                         label='Choose city'
-                        value={'Gliwice'}
+                        value={city}
                     />
                     <Button
                         style={styles.button}
@@ -58,7 +67,7 @@ const WeatherComponent = (props) => {
                     <Text style={styles.title}>{dateConverter(dateTime)}</Text>
                 </View>
                 <View style={styles.bodyContainer}>
-                    <Text style={styles.title}>Gliwice</Text>
+                    <Text style={styles.title}>{city}</Text>
                     <Text style={styles.subtitle}>{pressure} hPa</Text>
                     <Text style={styles.description}>
                         {capitalizeFirstLetter(weather.description)}
@@ -84,8 +93,8 @@ const WeatherComponent = (props) => {
         );
     } else {
         return (
-            <View>
-                <Text>Oh no, something went wrong</Text>
+            <View style={styles.indicatorContainer}>
+                <ActivityIndicator size={'large'} color={'#fff'} />
             </View>
         );
     }
@@ -100,6 +109,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
+    },
+    indicatorContainer: {
+        flex: 1,
+        backgroundColor: '#1F1C2C',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     tempText: {
         fontSize: 72,
