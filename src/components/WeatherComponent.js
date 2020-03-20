@@ -1,34 +1,108 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { TextInput, Button } from 'react-native-paper';
+import { weatherConditions } from '../constants/weatherConditions';
+import { dateConverter, timeConverter } from '../utils/timeConverter';
+import { capitalizeFirstLetter } from '../utils/stringConverter';
 
 const WeatherComponent = (props) => {
-    return (
-        <View style={styles.weatherContainer}>
-            <View style={styles.headerContainer}>
-                <MaterialCommunityIcons size={48} name='weather-sunny' color={'#fff'} />
-                <Text style={styles.tempText}>Temperature˚</Text>
+    const { weather, fetchingError, pending, temperature, pressure, sunSystem, dateTime } = props;
+
+    if (weather != null) {
+        return (
+            <View
+                style={[
+                    styles.weatherContainer,
+                    { backgroundColor: weatherConditions[weather.main].color },
+                ]}
+            >
+                <View style={styles.row}>
+                    <TextInput
+                        style={[
+                            styles.input,
+                            {
+                                backgroundColor: weatherConditions[weather.main].color,
+                            },
+                        ]}
+                        mode='outlined'
+                        label='Choose city'
+                        value={'Gliwice'}
+                    />
+                    <Button
+                        style={styles.button}
+                        contentStyle={[
+                            styles.buttonContent,
+                            {
+                                backgroundColor: weatherConditions[weather.main].color,
+                            },
+                        ]}
+                        mode='outlined'
+                        compact={true}
+                        onPress={() => console.log('Pressed')}
+                    >
+                        CHECK
+                    </Button>
+                </View>
+
+                <View style={styles.headerContainer}>
+                    <MaterialCommunityIcons
+                        size={72}
+                        name={weatherConditions[weather.main].icon}
+                        color={'#fff'}
+                    />
+                    <Text style={styles.tempText}>{Math.round(temperature)}˚C</Text>
+                </View>
+                <View style={styles.dateTimeContainer}>
+                    <Text style={styles.title}>{timeConverter(dateTime)}</Text>
+                    <Text style={styles.title}>{dateConverter(dateTime)}</Text>
+                </View>
+                <View style={styles.bodyContainer}>
+                    <Text style={styles.title}>Gliwice</Text>
+                    <Text style={styles.subtitle}>{pressure} hPa</Text>
+                    <Text style={styles.description}>
+                        {capitalizeFirstLetter(weather.description)}
+                    </Text>
+                    <View style={styles.row}>
+                        <MaterialCommunityIcons
+                            style={styles.sunIcon}
+                            size={32}
+                            name={'weather-sunset-up'}
+                            color={'#fff'}
+                        />
+                        <Text style={styles.subtitle}>{timeConverter(sunSystem.sunrise)}</Text>
+                        <MaterialCommunityIcons
+                            style={styles.sunIcon}
+                            size={32}
+                            name={'weather-sunset-down'}
+                            color={'#fff'}
+                        />
+                        <Text style={styles.subtitle}>{timeConverter(sunSystem.sunset)}</Text>
+                    </View>
+                </View>
             </View>
-            <View style={styles.bodyContainer}>
-                <Text style={styles.title}>So Sunny</Text>
-                <Text style={styles.subtitle}>It hurts my eyes!</Text>
+        );
+    } else {
+        return (
+            <View>
+                <Text>Oh no, something went wrong</Text>
             </View>
-        </View>
-    );
+        );
+    }
 };
 
 const styles = StyleSheet.create({
     weatherContainer: {
         flex: 1,
-        backgroundColor: '#f7b733',
     },
     headerContainer: {
         flex: 1,
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
     },
     tempText: {
-        fontSize: 48,
+        fontSize: 72,
         color: '#fff',
     },
     bodyContainer: {
@@ -38,13 +112,45 @@ const styles = StyleSheet.create({
         paddingLeft: 25,
         marginBottom: 40,
     },
+    dateTimeContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     title: {
         fontSize: 48,
         color: '#fff',
     },
     subtitle: {
-        fontSize: 24,
+        fontSize: 18,
         color: '#fff',
+    },
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignContent: 'center',
+        justifyContent: 'center',
+    },
+    sunIcon: {
+        marginRight: 5,
+    },
+    description: {
+        fontSize: 36,
+        color: '#fff',
+    },
+    input: {
+        margin: 10,
+        marginRight: 0,
+        width: '70%',
+    },
+    button: {
+        margin: 10,
+        marginLeft: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonContent: {
+        margin: 10,
     },
 });
 

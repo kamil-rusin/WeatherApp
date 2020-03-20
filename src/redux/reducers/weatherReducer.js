@@ -7,9 +7,13 @@ import {
 
 const initialState = {
     pending: false,
-    weather: [],
+    weather: null,
+    temperature: null,
+    pressure: null,
+    sunSystem: null,
     error: null,
     city: null,
+    dateTime: null,
 };
 
 const weatherReducer = (state = initialState, action) => {
@@ -25,6 +29,10 @@ const weatherReducer = (state = initialState, action) => {
                 ...state,
                 pending: false,
                 weather: action.weather,
+                temperature: action.temperature,
+                pressure: action.pressure,
+                sunSystem: action.sunSystem,
+                dateTime: action.dateTime,
             };
         case FETCH_DATA_ERROR:
             return {
