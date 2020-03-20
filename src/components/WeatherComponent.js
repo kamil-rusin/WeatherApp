@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput, Button, ActivityIndicator } from 'react-native-paper';
@@ -16,7 +16,10 @@ const WeatherComponent = (props) => {
         sunSystem,
         dateTime,
         city,
+        fetchData,
     } = props;
+    const [value, setValue] = useState('');
+    const cityInput = useRef();
 
     if (weather != null) {
         return (
@@ -36,7 +39,8 @@ const WeatherComponent = (props) => {
                         ]}
                         mode='outlined'
                         label='Choose city'
-                        value={city}
+                        onChangeText={(text) => setValue(text)}
+                        ref={cityInput}
                     />
                     <Button
                         style={styles.button}
@@ -48,7 +52,7 @@ const WeatherComponent = (props) => {
                         ]}
                         mode='outlined'
                         compact={true}
-                        onPress={() => console.log('Pressed')}
+                        onPress={() => fetchData(value)}
                     >
                         CHECK
                     </Button>
@@ -163,6 +167,9 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         justifyContent: 'center',
         alignItems: 'center',
+        borderColor: '#fff',
+        borderWidth: 1,
+        marginTop: 14,
     },
     buttonContent: {
         margin: 10,

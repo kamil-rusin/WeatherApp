@@ -24,12 +24,15 @@ const WeatherContainer = (props) => {
     const dateTime = useSelector(getDateTime);
     const dispatch = useDispatch();
 
-    const fetchData = useCallback(() => {
-        dispatch(fetchDataAction('Gliwice'));
-    }, [dispatch]);
+    const fetchData = useCallback(
+        (city) => {
+            dispatch(fetchDataAction(city));
+        },
+        [dispatch],
+    );
 
     useEffect(() => {
-        fetchData();
+        fetchData('Gliwice');
     }, [fetchData]);
 
     return (
@@ -43,6 +46,7 @@ const WeatherContainer = (props) => {
                 city={chosenCity}
                 fetchingError={fetchingError}
                 pending={pending}
+                fetchData={fetchData}
             />
         </>
     );

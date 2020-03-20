@@ -33,6 +33,7 @@ const weatherReducer = (state = initialState, action) => {
                 pressure: action.pressure,
                 sunSystem: action.sunSystem,
                 dateTime: action.dateTime,
+                city: action.city,
             };
         case FETCH_DATA_ERROR:
             return {
