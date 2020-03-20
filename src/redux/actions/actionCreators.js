@@ -19,6 +19,7 @@ export const fetchDataSuccess = (data) => {
         pressure: data.main.pressure,
         sunSystem: data.sys,
         dateTime: data.dt,
+        city: data.name,
     };
 };
 
