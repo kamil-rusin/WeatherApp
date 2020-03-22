@@ -5,6 +5,7 @@ import { TextInput, Button, ActivityIndicator } from 'react-native-paper';
 import { weatherConditions } from '../constants/weatherConditions';
 import { dateConverter, timeConverter } from '../utils/timeConverter';
 import { capitalizeFirstLetter } from '../utils/stringConverter';
+import ErrorElement from './ErrorElement';
 
 const WeatherComponent = (props) => {
     const {
@@ -57,6 +58,8 @@ const WeatherComponent = (props) => {
                         CHECK
                     </Button>
                 </View>
+
+                {fetchingError && <ErrorElement message={fetchingError} />}
 
                 <View style={styles.headerContainer}>
                     <MaterialCommunityIcons

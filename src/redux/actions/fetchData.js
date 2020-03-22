@@ -1,5 +1,6 @@
 import { fetchDataError, fetchDataPending, fetchDataSuccess } from './actionCreators';
 import { API } from '../../constants/keys';
+import { capitalizeFirstLetter } from '../../utils/stringConverter';
 
 const fetchData = (city) => {
     return (dispatch) => {
@@ -9,8 +10,8 @@ const fetchData = (city) => {
         )
             .then((response) => response.json())
             .then((response) => {
-                if (response.error) {
-                    throw response.error;
+                if (response.message) {
+                    throw capitalizeFirstLetter(response.message);
                 }
                 dispatch(fetchDataSuccess(response));
                 return response;
