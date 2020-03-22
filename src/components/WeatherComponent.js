@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: 18,
         color: '#fff',
+        marginRight: 10,
     },
     row: {
         display: 'flex',

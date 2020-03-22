@@ -7,7 +7,7 @@ export const timeConverter = (UNIX_timestamp) => {
     const hour = a.getHours();
     const min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes();
     const sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
-    return hour + ':' + min + ':' + sec + ' UTC';
+    return hour + ':' + min + ':' + sec;
 };
 
 export const dateConverter = (UNIX_timestamp) => {
