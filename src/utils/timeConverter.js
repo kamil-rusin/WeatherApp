@@ -4,9 +4,9 @@ export const dateTimeConverter = (UNIX_timestamp) => {
 
 export const timeConverter = (UNIX_timestamp) => {
     const a = new Date(UNIX_timestamp * 1000);
-    const hour = a.getHours();
-    const min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes();
-    const sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
+    const hour = a.getUTCHours();
+    const min = a.getUTCMinutes() < 10 ? '0' + a.getUTCMinutes() : a.getUTCMinutes();
+    const sec = a.getUTCSeconds() < 10 ? '0' + a.getUTCSeconds() : a.getUTCSeconds();
     return hour + ':' + min + ':' + sec;
 };
 
@@ -26,8 +26,8 @@ export const dateConverter = (UNIX_timestamp) => {
         'Nov',
         'Dec',
     ];
-    const year = a.getFullYear();
-    const month = months[a.getMonth()];
-    const date = a.getDate();
+    const year = a.getUTCFullYear();
+    const month = months[a.getUTCMonth()];
+    const date = a.getUTCDate();
     return date + ' ' + month + ' ' + year;
 };
