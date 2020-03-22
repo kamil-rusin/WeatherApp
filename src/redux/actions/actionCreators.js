@@ -17,8 +17,11 @@ export const fetchDataSuccess = (data) => {
         weather: data.weather[0],
         temperature: data.main.temp,
         pressure: data.main.pressure,
-        sunSystem: data.sys,
-        dateTime: data.dt,
+        sunSystem: {
+            sunrise: data.sys.sunrise + data.timezone,
+            sunset: data.sys.sunset + data.timezone,
+        },
+        dateTime: data.dt + data.timezone,
         city: data.name,
     };
 };
