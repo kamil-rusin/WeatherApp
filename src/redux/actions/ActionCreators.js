@@ -3,7 +3,7 @@ import {
     FETCH_DATA_PENDING,
     FETCH_DATA_SUCCESS,
     UPDATE_CITY,
-} from '../../constants/types';
+} from '../../constants/Types';
 
 export const fetchDataPending = () => {
     return {

@@ -3,7 +3,7 @@ import {
     FETCH_DATA_SUCCESS,
     FETCH_DATA_PENDING,
     UPDATE_CITY,
-} from '../../constants/types';
+} from '../../constants/Types';
 
 const initialState = {
     pending: false,

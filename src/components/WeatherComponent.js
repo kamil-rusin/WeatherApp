@@ -1,11 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, Text, ScrollView, RefreshControl } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TextInput, Button, ActivityIndicator } from 'react-native-paper';
-import { weatherConditions } from '../constants/weatherConditions';
-import { dateConverter, timeConverter } from '../utils/timeConverter';
-import { capitalizeFirstLetter } from '../utils/stringConverter';
+import { ActivityIndicator } from 'react-native-paper';
+
+import { weatherConditions } from '../constants/WeatherConditions';
+import { dateConverter, timeConverter } from '../utils/TimeConverter';
+import { capitalizeFirstLetter } from '../utils/StringConverter';
 import ErrorElement from './ErrorElement';
+import SearchCityElement from './SearchCityElement';
 
 const WeatherComponent = (props) => {
     const {
@@ -19,8 +21,6 @@ const WeatherComponent = (props) => {
         city,
         fetchData,
     } = props;
-    const [value, setValue] = useState('');
-    const cityInput = useRef();
 
     if (weather != null) {
         return (
@@ -36,34 +36,7 @@ const WeatherComponent = (props) => {
                         { backgroundColor: weatherConditions[weather.main].color },
                     ]}
                 >
-                    <View style={styles.row}>
-                        <TextInput
-                            style={[
-                                styles.input,
-                                {
-                                    backgroundColor: weatherConditions[weather.main].color,
-                                },
-                            ]}
-                            mode='outlined'
-                            label='Choose city'
-                            onChangeText={(text) => setValue(text)}
-                            ref={cityInput}
-                        />
-                        <Button
-                            style={styles.button}
-                            contentStyle={[
-                                styles.buttonContent,
-                                {
-                                    backgroundColor: weatherConditions[weather.main].color,
-                                },
-                            ]}
-                            mode='outlined'
-                            compact={true}
-                            onPress={() => fetchData(value)}
-                        >
-                            CHECK
-                        </Button>
-                    </View>
+                    <SearchCityElement weather={weather.main} fetchData={fetchData} />
 
                     {fetchingError && <ErrorElement message={fetchingError} />}
 
@@ -168,23 +141,6 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 36,
         color: '#fff',
-    },
-    input: {
-        margin: 10,
-        marginRight: 0,
-        width: '70%',
-    },
-    button: {
-        margin: 10,
-        marginLeft: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderColor: '#fff',
-        borderWidth: 1,
-        marginTop: 14,
-    },
-    buttonContent: {
-        margin: 10,
     },
 });
 
