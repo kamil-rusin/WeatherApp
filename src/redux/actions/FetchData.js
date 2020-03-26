@@ -1,6 +1,6 @@
-import { fetchDataError, fetchDataPending, fetchDataSuccess } from './actionCreators';
-import { API } from '../../constants/keys';
-import { capitalizeFirstLetter } from '../../utils/stringConverter';
+import { fetchDataError, fetchDataPending, fetchDataSuccess } from './ActionCreators';
+import { API } from '../../constants/Keys';
+import { capitalizeFirstLetter } from '../../utils/StringConverter';
 
 const fetchData = (city) => {
     return (dispatch) => {

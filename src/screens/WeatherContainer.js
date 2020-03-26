@@ -1,8 +1,9 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import fetchDataAction from '../redux/actions/fetchData';
+import fetchDataAction from '../redux/actions/FetchData';
 import WeatherComponent from '../components/WeatherComponent';
+import { DEFAULT_CITY } from '../constants/Keys';
 
 const getError = (state) => state.weatherReducer.error;
 const getCity = (state) => state.weatherReducer.city;
@@ -13,7 +14,7 @@ const getPressure = (state) => state.weatherReducer.pressure;
 const getSunSystem = (state) => state.weatherReducer.sunSystem;
 const getDateTime = (state) => state.weatherReducer.dateTime;
 
-const WeatherContainer = (props) => {
+const WeatherContainer = () => {
     const weatherData = useSelector(getWeather);
     const fetchingError = useSelector(getError);
     const chosenCity = useSelector(getCity);
@@ -32,7 +33,7 @@ const WeatherContainer = (props) => {
     );
 
     useEffect(() => {
-        fetchData('Gliwice');
+        fetchData(DEFAULT_CITY);
     }, [fetchData]);
 
     return (
